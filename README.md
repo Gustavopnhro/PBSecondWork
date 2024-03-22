@@ -1,11 +1,11 @@
-## SEGUNDA ATIVIDADE PB COMPASS
+# SEGUNDA ATIVIDADE PB COMPASS
 
 
 <div align="center">
   <img src="./src/img/logo_uol_compass.png" width="340px">
 </div>
 
-### Descrição
+## Descrição
 
 A atividade consiste na instalação do "docker" ou "containerd" no host Ec2, em seguida efetuar o deploy de uma aplicação Wordpress dispondo de um RDS utilizando o Mysql, efetuar a configuração do serviço EFS (Elastic File System) para os estáticos do container da aplicação Wordpress e configurar o serviço de Load Balancer para a aplicação.
 
@@ -19,7 +19,7 @@ Observações:
 - Utilizar repositório Git para versionamento;
 - Criar documentação.
 
-### Requisitos 
+## Requisitos 
 
 - Instalação e configuração do DOCKER ou CONTAINERD no host EC2;
 
@@ -42,3 +42,36 @@ Pontos de atenção:
 - Aplicação Wordpress precisa estar rodando na porta 80 ou 8080;
 - Utilizar repositório git para versionamento;
 - Criar documentação.
+
+
+## Criação Manual
+
+### 🔒 Security Groups 🔑
+Criar um Security Group específico para cada recurso:
+
++  Grupo de Segurança para as EC2 deve conter as seguintes Inbound Rules:
+
+  |Protocol| Type | Range | Source-type | Source     |
+  |--------|------|-------|-------------|------------|
+  |TCP     |SSH   |22     |Custom       |172.0.0.0/32|
+  |TCP     |HTTP  |80     |Anywhere     |0.0.0.0/0   |
+
+<div align="center">
+  <img src="./src/img/steps/sg-001.png" alt="Security Group para a EC2" width="850px">
+   <p><em>Security Group para a EC2</em></p>
+</div>
+
++  Grupo de Segurança para o Load Balancer deve conter as seguintes Inbound Rules:
+
+  |Protocol| Type | Range | Source-type | Source     |
+  |--------|------|-------|-------------|------------|
+  |TCP     |HTTP  |80     |Anywhere     |0.0.0.0/0   |
+
+<div align="center">
+  <img src="./src/img/steps/sg-002.png" alt="Security Group para a EC2" width="850px">
+   <p><em>Security Group para o Load Balancer</em></p>
+</div>
+
+
+
+### 📚 Referências 📚
