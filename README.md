@@ -47,31 +47,52 @@ Pontos de atenção:
 ## Criação Manual
 
 ### 🔒 Security Groups 🔑
-Criar um Security Group específico para cada recurso:
+Durante esse processo eu vou criar os security groups que serão usados:
 
-+  Grupo de Segurança para as EC2 deve conter as seguintes Inbound Rules:
++ lb-sg-001 - Security Group para o Load Balancer:
+  
+  |Protocol| Type | Range | Source-type | Source     |
+  |--------|------|-------|-------------|------------|
+  |TCP     |HTTP  |80     |Anywhere     |0.0.0.0/0   |
+
+<div align="center">
+  <img src="./src/img/steps/sg-002.png" alt="Security Group para o Load Balancer" width="850px">
+   <p><em>Security Group para o Load Balancer</em></p>
+</div>
+
+
++  ec2-sg-001 - Security Group para as instâncias EC2:
 
   |Protocol| Type | Range | Source-type | Source     |
   |--------|------|-------|-------------|------------|
   |TCP     |SSH   |22     |Custom       |172.0.0.0/32|
-  |TCP     |HTTP  |80     |Anywhere     |0.0.0.0/0   |
+  |TCP     |HTTP  |80     |Anywhere     |lb-sg-001   |
 
 <div align="center">
   <img src="./src/img/steps/sg-001.png" alt="Security Group para a EC2" width="850px">
    <p><em>Security Group para a EC2</em></p>
 </div>
 
-+  Grupo de Segurança para o Load Balancer deve conter as seguintes Inbound Rules:
++ rds-sg-001 - Security Group para o serviço de banco de dados com RDS:
 
-  |Protocol| Type | Range | Source-type | Source     |
-  |--------|------|-------|-------------|------------|
-  |TCP     |HTTP  |80     |Anywhere     |0.0.0.0/0   |
+  |Protocol| Type         | Range | Source-type | Source     |
+  |--------|--------------|-------|-------------|------------|
+  |TCP     |MYSQL/Aurora  |3306   |Anywhere     |0.0.0.0/0   |
 
 <div align="center">
-  <img src="./src/img/steps/sg-002.png" alt="Security Group para a EC2" width="850px">
-   <p><em>Security Group para o Load Balancer</em></p>
+  <img src="./src/img/steps/sg-003.png" alt="Security Group para o RDS" width="850px">
+   <p><em>Security Group para o RDS/em></p>
 </div>
 
++ efs-sg-001 - Security Group para o serviço de EFS:
+ 
+  |Protocol| Type | Range | Source-type | Source     |
+  |--------|------|-------|-------------|------------|
+  |TCP     |NFS   |2049   |Anywhere     |lb-sg-001   |
 
+<div align="center">
+  <img src="./src/img/steps/sg-004.png" alt="Security Group para o EFS" width="850px">
+   <p><em>Security Group para o EFS</em></p>
+</div>
 
 ### 📚 Referências 📚
