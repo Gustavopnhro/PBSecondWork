@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  wordpress:
+    image: wordpress:latest
+    volumes:
+      - /mnt/efs/wordpress:/var/www/html #Garante que o diretório de montagem será usada pelo container
+    ports:
+      - 80:80 #Garante que a aplicação será exposta na porta 80
+    environment:
+      WORDPRESS_DB_HOST: <RDS endpoint>
+      WORDPRESS_DB_USER: <master user>
+      WORDPRESS_DB_PASSWORD: <master password>
+      WORDPRESS_DB_NAME: <initial database>
+      WORDPRESS_TABLE_CONFIG: wp_
