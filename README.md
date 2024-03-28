@@ -88,7 +88,7 @@ Durante esse processo eu vou criar os security groups que serão usados:
  
   |Protocol| Type | Range | Source-type | Source     |
   |--------|------|-------|-------------|------------|
-  |TCP     |NFS   |2049   |Anywhere     |lb-sg-001   |
+  |TCP     |NFS   |2049   |Custom       |ec2-sg-001  |
 
 <div align="center">
   <img src="./src/img/steps/sg-004.PNG" alt="Security Group para o EFS" width="850px">
@@ -132,6 +132,79 @@ No securtiy group vou adicionar o "lb-sg-001" criado anteriormente, e no "/wp-ad
   <img src="./src/img/steps/lb-003.png" width="850px">
    <p><em>Classic Load Balancer</em></p>
 </div>
+
+### RDS
+
+Nessa seção eu vou criar o banco de dados que será utilizado pelo container wordpress.
+
+Eu vou primeiro entrar dentro do módulo de RDS dentro da AWS e clicar em "Create Database", dentro da tela de criação apenas algumas seções devem ser alteradas:
+
+Engine Options => MySQL,</br>
+Templates => Free tier</br>
+Db Instance Identifier => wordpress-database,</br>
+Master Password => { senha que desejar },</br>
+Public Access => No, </br>
+Vpc Security Group => rds-sg-001 </br>
+
+<div align="center">
+  <img src="./src/img/steps/rds-001.png" width="850px">
+</div>
+
+
+<div align="center">
+  <img src="./src/img/steps/rds-002.png" width="850px">
+</div>
+
+
+<div align="center">
+  <img src="./src/img/steps/rds-003.png" width="850px">
+</div>
+
+
+<div align="center">
+  <img src="./src/img/steps/rds-004.png" width="850px">
+</div>
+
+
+
+Na parte de "Additional Configuration" vamos colocar o initial database name como "Wordpress"
+
+<div align="center">
+  <img src="./src/img/steps/rds-005.png" width="850px">
+</div>
+
+E então vamos criar o banco
+
+
+### Launch Template e Key Pair
+Nessa seção eu vou criar o Launch Template que será utilizado pelo auto-scaling.
+
+Dentro do módulo de EC2 na seção de "Instances" um pouco abaixo é possível ver o "Launch Templates", em seguida vou configurar de acordo com as métricas pré-estabelecidas.
+
+Launch template name => wordpress-template,</br>
+AMI => Amazon Linux 2023 AMI,</br>
+Instance Type => t3.small,</br>
+Security Group => ec2-sg-001</br>
+
+Exemplo:
+
+
+Na seção de Key Pair vamos optar por criar um nova chave clicando na opção "Create new key pair"
+<div align="center">
+  <img src="./src/img/steps/lt-001.png" width="850px">
+</div>
+
+
+E então vou colocar um nome opcional no formato ".pem"
+<div align="center">
+  <img src="./src/img/steps/lt-002.png" width="850px">
+   <p><em>Launch Template</em></p>
+</div>
+
+Automaticamente a chave já será referenciada, mas no caso de não aparecer basta selecionar a chave criada.
+
+Em "Resource Tags" adicionei as tags referentes ao PB para permitir a criação das instâncias e em "Advanced Details" no último campo adicionei o script user_data.sh adaptado ao meu ambiente.
+
 
 
 ### 📚 Referências 📚
