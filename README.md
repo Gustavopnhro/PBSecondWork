@@ -65,7 +65,7 @@ Durante esse processo eu vou criar os security groups que serão usados:
 
   |Protocol| Type | Range | Source-type | Source     |
   |--------|------|-------|-------------|------------|
-  |TCP     |SSH   |22     |Custom       |172.0.0.0/32|
+  |TCP     |SSH   |22     |My ip        |172.0.0.0/32|
   |TCP     |HTTP  |80     |Anywhere     |lb-sg-001   |
 
 <div align="center">
@@ -75,13 +75,13 @@ Durante esse processo eu vou criar os security groups que serão usados:
 
 + rds-sg-001 - Security Group para o serviço de banco de dados com RDS:
 
-  |Protocol| Type         | Range | Source-type | Source     |
-  |--------|--------------|-------|-------------|------------|
-  |TCP     |MYSQL/Aurora  |3306   |Anywhere     |0.0.0.0/0   |
+  |Protocol| Type   | Range | Source-type | Source     |
+  |--------|--------|-------|-------------|------------|
+  |TCP     |MYSQL   |3306   |Anywhere     |0.0.0.0/0   |
 
 <div align="center">
   <img src="./src/img/steps/sg-003.png" alt="Security Group para o RDS" width="850px">
-   <p><em>Security Group para o RDS/em></p>
+   <p><em>Security Group para o RDS</em></p>
 </div>
 
 + efs-sg-001 - Security Group para o serviço de EFS:
@@ -91,8 +91,47 @@ Durante esse processo eu vou criar os security groups que serão usados:
   |TCP     |NFS   |2049   |Anywhere     |lb-sg-001   |
 
 <div align="center">
-  <img src="./src/img/steps/sg-004.png" alt="Security Group para o EFS" width="850px">
+  <img src="./src/img/steps/sg-004.PNG" alt="Security Group para o EFS" width="850px">
    <p><em>Security Group para o EFS</em></p>
 </div>
+
+### Elastic File System
+
+Em seguida vou criar o Elastic File System (EFS) que irá armazenar os arquivos estáticos do wordpress direcionando seus endpoints
+
+Na tela de EFS vou configurar o nome como "wordpress" e a VPC que será usada no processo, com o EFS criado vamos configurar na aba de network o security group para o efs-sg-001 criado anteriormente.
+
+<div align="center">
+  <img src="./src/img/steps/efs-001.png" width="850px">
+</div>
+
+
+<div align="center">
+  <img src="./src/img/steps/efs-002.png" width="850px">
+   <p><em>Aba "Network" do EFS</em></p>
+</div>
+
+### Load Balancer (Classic)
+
+Nessa seção eu vou criar o Load Balancer Classic que será utilizado para acesso:
+
+<div align="center">
+  <img src="./src/img/steps/lb-001.png" width="850px">
+   <p><em>Classic Load Balancer</em></p>
+</div>
+
+O nome do Classic Load Balancer será "classic-load-balance-001" e escolher as duas subnets que as requisições serão balanceadas
+<div align="center">
+  <img src="./src/img/steps/lb-002.png" width="850px">
+   <p><em>Classic Load Balancer</em></p>
+</div>
+
+No securtiy group vou adicionar o "lb-sg-001" criado anteriormente, e no "/wp-admin/install.php", a razão para optar por esse health-check é pela característica da atividade, como essa é uma rota que existe antes e depois do wordpress estar instalado na necessidade de apagar toda a estrutura e subir ela novamente vamos ter ela acessível e saudável para o health check antes mesmo de instalarmos o wordpress.
+
+<div align="center">
+  <img src="./src/img/steps/lb-003.png" width="850px">
+   <p><em>Classic Load Balancer</em></p>
+</div>
+
 
 ### 📚 Referências 📚
