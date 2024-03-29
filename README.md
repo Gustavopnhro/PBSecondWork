@@ -252,3 +252,31 @@ E ao acessar o DNS do Load Balancer eu consigo ter acesso ao site!
 
 ### 📚 Referências 📚
 https://stackoverflow.com/questions/45193411/how-to-increase-aws-ec2-instance-cpu-utilization-to-100-to-test-autoscaling-gro
+
+
+### ADICIONAIS 
+
+#### Teste de Scaling usando Stress
+Após eu criar o auto-scaling group eu coloquei a sua policy para utilização de CPU em 30, significando que, sempre que ela atingisse 30% de seu uso uma nova instância seria criada para suprir essa demanda.
+
+Obs: Vale lembrar que, em ambiente produtivo esse percentual seria um pouco maior, mas para observar isso em curto espaço de tempo eu vou usar somente 30%.
+
+Primeiro eu vou entrar na instância através do comando de SSH:
+
+```bash
+ssh -i "local/da/chave" ec2-user@<id_publico_da_instancia>
+```
+
+E após adentrar eu vou rodar o seguinte comando:
+
+```bash
+stress -c 2
+```
+
+O comando acima significa que vamos estressar a cpu (flag c) sem tempo limite em 2 núcleos da cpu e então vou esperar alguns segundos até que a instância fique estressada e ative o autoscaling.
+
+Alguns minutos depois terei 4 instâncias como foi solicitado no autoscaling
+
+<div align="center">
+  <img src="./src/img/steps/add-001.png" width="850px">
+</div>
