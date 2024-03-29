@@ -253,7 +253,9 @@ E ao acessar o DNS do Load Balancer eu consigo ter acesso ao site!
 ### 📚 Referências 📚
 https://stackoverflow.com/questions/45193411/how-to-increase-aws-ec2-instance-cpu-utilization-to-100-to-test-autoscaling-gro
 
+https://developer.hashicorp.com/terraform/tutorials/aws-get-started
 
+https://registry.terraform.io/providers/aaronfeng/aws/latest/docs/resources
 ### ADICIONAIS 
 
 #### Teste de Scaling usando Stress
@@ -280,3 +282,6 @@ Alguns minutos depois terei 4 instâncias como foi solicitado no autoscaling
 <div align="center">
   <img src="./src/img/steps/add-001.png" width="850px">
 </div>
+
+
+### Terraform
