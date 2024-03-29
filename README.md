@@ -46,6 +46,23 @@ Pontos de atenção:
 
 ## Criação Manual
 
+### Criação de VPC
+Para proporcionar um ambiente livre de falhas vou primeiro criar uma nova VPC para iniciar o projeto do zero.
+Dentro do módulo de VPC vou optar pelo "VPC and More" e então alterar algumas partes:
+
+Name => "wordpress",<br>
+Number of AZ => 2, <br>
+Number of Public Subnets => 2, <br>
+Number of Private Subnets => 0, <br>
+NAT Gateway => None, <br>
+VPC Endpoint => None <br>
+
+
+<div align="center">
+  <img src="./src/img/steps/vpc-001.png"  width="850px">
+  <img src="./src/img/steps/vpc-002.png"  width="850px">
+</div>
+
 ### 🔒 Security Groups 🔑
 Durante esse processo eu vou criar os security groups que serão usados:
 
@@ -148,20 +165,8 @@ Vpc Security Group => rds-sg-001 </br>
 
 <div align="center">
   <img src="./src/img/steps/rds-001.png" width="850px">
-</div>
-
-
-<div align="center">
   <img src="./src/img/steps/rds-002.png" width="850px">
-</div>
-
-
-<div align="center">
   <img src="./src/img/steps/rds-003.png" width="850px">
-</div>
-
-
-<div align="center">
   <img src="./src/img/steps/rds-004.png" width="850px">
 </div>
 
@@ -205,6 +210,45 @@ Automaticamente a chave já será referenciada, mas no caso de não aparecer bas
 
 Em "Resource Tags" adicionei as tags referentes ao PB para permitir a criação das instâncias e em "Advanced Details" no último campo adicionei o script user_data.sh adaptado ao meu ambiente.
 
+## Auto Scaling Group
 
+Vou na seção de Auto Scaling Groups existente no módulo de Ec2 e vou optar pelo template criado no passo anterior
+
+<div align="center">
+  <img src="./src/img/steps/auto-001.png" width="850px">
+</div>
+
+Na seção seguinte vou mapear as duas subnets onde nossas ec2 vão ficar
+
+<div align="center">
+  <img src="./src/img/steps/auto-002.png" width="850px">
+</div>
+
+Na seção seguinte vou colocar o load balacing que criamos anteriormente (Classic Load Balancer)
+
+<div align="center">
+  <img src="./src/img/steps/auto-003.png" width="850px">
+</div>
+
+Na seção seguinte vou declarar as políticas de scaling, e então vamos finalizar a criação.
+<div align="center">
+  <img src="./src/img/steps/auto-004.png" width="850px">
+</div>
+
+### Instalação do Wordpress
+
+Após alguns minutos as instâncias configuradas no scaling vão começar a subir e então eu vou instalar o wordpress e configurar a senha de admin e título da página.
+
+<div align="center">
+  <img src="./src/img/steps/wp-001.png" width="850px">
+  <img src="./src/img/steps/wp-002.png" width="850px">
+</div>
+
+E ao acessar o DNS do Load Balancer eu consigo ter acesso ao site!
+
+<div align="center">
+  <img src="./src/img/steps/wp-003.png" width="850px">
+</div>
 
 ### 📚 Referências 📚
+https://stackoverflow.com/questions/45193411/how-to-increase-aws-ec2-instance-cpu-utilization-to-100-to-test-autoscaling-gro
