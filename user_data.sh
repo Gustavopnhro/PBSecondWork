@@ -7,10 +7,10 @@ sudo systemctl start docker
 sudo systemctl enable docker
 sudo mkdir /mnt/efs
 sudo su
-sudo echo "<efs_dns>:/    /mnt/efs    nfs4    defaults,_netdev,rw    0   0" >  /etc/fstab 
+echo "<efs_dns>:/    /mnt/efs    nfs4    defaults,_netdev,rw    0   0" >  /etc/fstab 
 mount -a
-sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /bin/docker-compose
-sudo chmod +x /bin/docker-compose
+curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /bin/docker-compose
+chmod +x /bin/docker-compose
 cat <<EOL > /home/ec2-user/docker-compose.yml
 version: '3.8'
 services:
@@ -27,5 +27,5 @@ services:
       WORDPRESS_DB_NAME: <initial database>
       WORDPRESS_TABLE_CONFIG: wp_
 EOL
-sudo docker-compose -f /home/ec2-user/docker-compose.yml up -d
-sudo yum update
+docker-compose -f /home/ec2-user/docker-compose.yml up -d
+yum update
