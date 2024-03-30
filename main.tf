@@ -130,6 +130,12 @@ resource "aws_security_group" "ec2-security-group" {
     protocol    = "tcp"
     security_groups = [aws_security_group.lb-security-group.id]
   }
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["170.81.0.0/16"]
+  }
 
   egress {
     from_port   = 0
@@ -186,7 +192,7 @@ resource "aws_db_subnet_group" "db_subnet_group" {
 
 resource "aws_key_pair" "key_pair" {
   key_name   = "keyPair001"
-  public_key = file("~/.ssh/id_rsa.pub")
+  public_key = file("~/.ssh/KeyPair001.pub")
 }
 
 
@@ -245,10 +251,11 @@ resource "aws_launch_template" "launch-template" {
               sudo systemctl enable docker
               sudo mkdir /mnt/efs
               sudo yum install stress -y
-              sudo echo "${aws_efs_file_system.efs.dns_name}:/    /mnt/efs    nfs4    defaults,_netdev,rw    0   0" >>  /etc/fstab 
-              sudo mount -a
-              sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /bin/docker-compose
-              sudo chmod +x /bin/docker-compose
+              sudo su
+              echo "${aws_efs_file_system.efs.dns_name}:/    /mnt/efs    nfs4    defaults,_netdev,rw    0   0" >>  /etc/fstab 
+              mount -a
+              curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /bin/docker-compose
+              chmod +x /bin/docker-compose
               cat <<EOL > /home/ec2-user/docker-compose.yml
               version: '3.8'
               services:
@@ -265,8 +272,8 @@ resource "aws_launch_template" "launch-template" {
                     WORDPRESS_DB_NAME: wordpress
                     WORDPRESS_TABLE_CONFIG: wp_
               EOL
-              sudo docker-compose -f /home/ec2-user/docker-compose.yml up -d
-              sudo yum update
+              docker-compose -f /home/ec2-user/docker-compose.yml up -d
+              yum update
               EOF
             )
 }
