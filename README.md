@@ -19,6 +19,12 @@ Observações:
 - Utilizar repositório Git para versionamento;
 - Criar documentação.
 
+## Topologia
+
+<div align="center">
+  <img src="./src/img/steps/topologia.png"  width="850px">
+</div>
+
 ## Requisitos 
 
 - Instalação e configuração do DOCKER ou CONTAINERD no host EC2;
@@ -44,9 +50,9 @@ Pontos de atenção:
 - Criar documentação.
 
 
-## Criação Manual
+## Criação através da Console
 
-### Criação de VPC
+### 📌 Criação de VPC 📌
 Para proporcionar um ambiente livre de falhas vou primeiro criar uma nova VPC para iniciar o projeto do zero.
 Dentro do módulo de VPC vou optar pelo "VPC and More" e então alterar algumas partes:
 
@@ -112,7 +118,7 @@ Durante esse processo eu vou criar os security groups que serão usados:
    <p><em>Security Group para o EFS</em></p>
 </div>
 
-### Elastic File System
+### 📁 Elastic File System 📁
 
 Em seguida vou criar o Elastic File System (EFS) que irá armazenar os arquivos estáticos do wordpress direcionando seus endpoints
 
@@ -128,7 +134,7 @@ Na tela de EFS vou configurar o nome como "wordpress" e a VPC que será usada no
    <p><em>Aba "Network" do EFS</em></p>
 </div>
 
-### Load Balancer (Classic)
+###  ⚖️ Load Balancer (Classic) ⚖️
 
 Nessa seção eu vou criar o Load Balancer Classic que será utilizado para acesso:
 
@@ -150,7 +156,7 @@ No securtiy group vou adicionar o "lb-sg-001" criado anteriormente, e no "/wp-ad
    <p><em>Classic Load Balancer</em></p>
 </div>
 
-### RDS
+### 🗄️ RDS (Banco de Dados) 🗄️
 
 Nessa seção eu vou criar o banco de dados que será utilizado pelo container wordpress.
 
@@ -210,7 +216,7 @@ Automaticamente a chave já será referenciada, mas no caso de não aparecer bas
 
 Em "Resource Tags" adicionei as tags referentes ao PB para permitir a criação das instâncias e em "Advanced Details" no último campo adicionei o script user_data.sh adaptado ao meu ambiente.
 
-## Auto Scaling Group
+## ⚙️ Auto Scaling Group ⚙️
 
 Vou na seção de Auto Scaling Groups existente no módulo de Ec2 e vou optar pelo template criado no passo anterior
 
@@ -235,7 +241,7 @@ Na seção seguinte vou declarar as políticas de scaling, e então vamos finali
   <img src="./src/img/steps/auto-004.png" width="850px">
 </div>
 
-### Instalação do Wordpress
+### 🖥️ Instalação do Wordpress 🖥️
 
 Após alguns minutos as instâncias configuradas no scaling vão começar a subir e então eu vou instalar o wordpress e configurar a senha de admin e título da página.
 
@@ -258,7 +264,7 @@ https://developer.hashicorp.com/terraform/tutorials/aws-get-started
 https://registry.terraform.io/providers/aaronfeng/aws/latest/docs/resources
 ### ADICIONAIS 
 
-#### Teste de Scaling usando Stress
+#### 🚦 Teste de Scaling usando Stress 🚦
 Após eu criar o auto-scaling group eu coloquei a sua policy para utilização de CPU em 30, significando que, sempre que ela atingisse 30% de seu uso uma nova instância seria criada para suprir essa demanda.
 
 Obs: Vale lembrar que, em ambiente produtivo esse percentual seria um pouco maior, mas para observar isso em curto espaço de tempo eu vou usar somente 30%.
@@ -284,4 +290,42 @@ Alguns minutos depois terei 4 instâncias como foi solicitado no autoscaling
 </div>
 
 
-### Terraform
+###  <img src="./src/img/steps/terraform-icon.png" width="25px"> Terraform <img src="./src/img/steps/terraform-icon.png" width="25px">
+
+Esse módulo é um extra para a criação automática de toda a estrutura realizada no escopo da atividade:
+
+Consiste na criação de: <br>
+1 VPC; <br>
+2 subnets; <br>
+1 Internet Gateway; <br>
+1 Route Table; <br>
+1 RDS; <br>
+4 Security Groups; <br>
+1 Autoscaling Group;<br>
+1 EFS;<br>
+1 Autoscaling Policy; <br>
+1 Launch Template; <br>
+1 Classic Load Balancer. <br>
+
+O código está disponível no repositório com o nome "main.tf", diante disso eu vou instalar o terraform disponível nesse link: https://developer.hashicorp.com/terraform/install
+
+Antes de iniciar o terraform vou gerar uma chave pública e privada que vai ser referenciada na hora de criar a Key Pair da AWS para acesso às instâncias, vou abrir o terminal powershell e executar:
+
+```bash
+ssh-keygen -f .ssh\KeyPair001 
+```
+
+A partir daí dentro de um terminal vou até a pasta do repositório e então exportar as chaves das minhas credenciais AWS e em seguida executar o comando para iniciar o terraform
+
+```bash
+terraform init
+```
+
+Em seguida executar o comando para criação dos recursos na aws
+
+```bash
+terraform apply
+```
+
+Enfim vou ter a estrutura totalmente montada, um total de 22 recursos.
+
