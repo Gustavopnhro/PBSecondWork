@@ -2,7 +2,7 @@
 
 
 <div align="center">
-  <img src="src/img/logo_uol_compass.png" width="340px">
+  <img src="src/img/logo_uol_compass.png" PNG="340px">
 </div>
 
 ## Descrição
@@ -22,7 +22,7 @@ Observações:
 ## Topologia
 
 <div align="center">
-  <img src="src/img/steps/topologia.png"  width="850px">
+  <img src="src/img/steps/topologia.pngPNG  width="850px">
 </div>
 
 ## Requisitos 
@@ -65,8 +65,8 @@ VPC Endpoint => None <br>
 
 
 <div align="center">
-  <img src="src/img/steps/vpc-001.png"  width="850px">
-  <img src="src/img/steps/vpc-002.png"  width="850px">
+  <img src="src/img/steps/vpc-001.PNG"  width="850px">
+  <img src="src/img/steps/vpc-002.PNG"  width="850px">
 </div>
 
 ### 🔒 Security Groups 🔑
@@ -79,7 +79,7 @@ Durante esse processo eu vou criar os security groups que serão usados:
   |TCP     |HTTP  |80     |Anywhere     |0.0.0.0/0   |
 
 <div align="center">
-  <img src="src/img/steps/sg-002.png" alt="Security Group para o Load Balancer" width="850px">
+  <img src="src/img/steps/sg-002.PNG" alt="Security Group para o Load Balancer" width="850px">
    <p><em>Security Group para o Load Balancer</em></p>
 </div>
 
@@ -92,7 +92,7 @@ Durante esse processo eu vou criar os security groups que serão usados:
   |TCP     |HTTP  |80     |Anywhere     |lb-sg-001   |
 
 <div align="center">
-  <img src="src/img/steps/sg-001.png" alt="Security Group para a EC2" width="850px">
+  <img src="src/img/steps/sg-001.PNG" alt="Security Group para a EC2" width="850px">
    <p><em>Security Group para a EC2</em></p>
 </div>
 
@@ -103,7 +103,7 @@ Durante esse processo eu vou criar os security groups que serão usados:
   |TCP     |MYSQL   |3306   |Anywhere     |0.0.0.0/0   |
 
 <div align="center">
-  <img src="src/img/steps/sg-003.png" alt="Security Group para o RDS" width="850px">
+  <img src="src/img/steps/sg-003.PNG" alt="Security Group para o RDS" width="850px">
    <p><em>Security Group para o RDS</em></p>
 </div>
 
@@ -125,12 +125,12 @@ Em seguida vou criar o Elastic File System (EFS) que irá armazenar os arquivos 
 Na tela de EFS vou configurar o nome como "wordpress" e a VPC que será usada no processo, com o EFS criado vamos configurar na aba de network o security group para o efs-sg-001 criado anteriormente.
 
 <div align="center">
-  <img src="src/img/steps/efs-001.png" width="850px">
+  <img src="src/img/steps/efs-001.PNG" width="850px">
 </div>
 
 
 <div align="center">
-  <img src="src/img/steps/efs-002.png" width="850px">
+  <img src="src/img/steps/efs-002.PNG" width="850px">
    <p><em>Aba "Network" do EFS</em></p>
 </div>
 
@@ -139,20 +139,20 @@ Na tela de EFS vou configurar o nome como "wordpress" e a VPC que será usada no
 Nessa seção eu vou criar o Load Balancer Classic que será utilizado para acesso:
 
 <div align="center">
-  <img src="src/img/steps/lb-001.png" width="850px">
+  <img src="src/img/steps/lb-001.PNG" width="850px">
    <p><em>Classic Load Balancer</em></p>
 </div>
 
 O nome do Classic Load Balancer será "classic-load-balance-001" e escolher as duas subnets que as requisições serão balanceadas
 <div align="center">
-  <img src="src/img/steps/lb-002.png" width="850px">
+  <img src="src/img/steps/lb-002.PNG" width="850px">
    <p><em>Classic Load Balancer</em></p>
 </div>
 
 No securtiy group vou adicionar o "lb-sg-001" criado anteriormente, e no "/wp-admin/install.php", a razão para optar por esse health-check é pela característica da atividade, como essa é uma rota que existe antes e depois do wordpress estar instalado na necessidade de apagar toda a estrutura e subir ela novamente vamos ter ela acessível e saudável para o health check antes mesmo de instalarmos o wordpress.
 
 <div align="center">
-  <img src="src/img/steps/lb-003.png" width="850px">
+  <img src="src/img/steps/lb-003.PNG" width="850px">
    <p><em>Classic Load Balancer</em></p>
 </div>
 
@@ -170,10 +170,10 @@ Public Access => No, </br>
 Vpc Security Group => rds-sg-001 </br>
 
 <div align="center">
-  <img src="src/img/steps/rds-001.png" width="850px">
-  <img src="src/img/steps/rds-002.png" width="850px">
-  <img src="src/img/steps/rds-003.png" width="850px">
-  <img src="src/img/steps/rds-004.png" width="850px">
+  <img src="src/img/steps/rds-001.PNG" width="850px">
+  <img src="src/img/steps/rds-002.PNG" width="850px">
+  <img src="src/img/steps/rds-003.PNG" width="850px">
+  <img src="src/img/steps/rds-004.PNG" width="850px">
 </div>
 
 
@@ -181,7 +181,7 @@ Vpc Security Group => rds-sg-001 </br>
 Na parte de "Additional Configuration" vamos colocar o initial database name como "Wordpress"
 
 <div align="center">
-  <img src="src/img/steps/rds-005.png" width="850px">
+  <img src="src/img/steps/rds-005.PNG" width="850px">
 </div>
 
 E então vamos criar o banco
@@ -202,13 +202,13 @@ Exemplo:
 
 Na seção de Key Pair vamos optar por criar um nova chave clicando na opção "Create new key pair"
 <div align="center">
-  <img src="src/img/steps/lt-001.png" width="850px">
+  <img src="src/img/steps/lt-001.PNG" width="850px">
 </div>
 
 
 E então vou colocar um nome opcional no formato ".pem"
 <div align="center">
-  <img src="src/img/steps/lt-002.png" width="850px">
+  <img src="src/img/steps/lt-002.PNG" width="850px">
    <p><em>Launch Template</em></p>
 </div>
 
@@ -221,24 +221,24 @@ Em "Resource Tags" adicionei as tags referentes ao PB para permitir a criação 
 Vou na seção de Auto Scaling Groups existente no módulo de Ec2 e vou optar pelo template criado no passo anterior
 
 <div align="center">
-  <img src="src/img/steps/auto-001.png" width="850px">
+  <img src="src/img/steps/auto-001.PNG" width="850px">
 </div>
 
 Na seção seguinte vou mapear as duas subnets onde nossas ec2 vão ficar
 
 <div align="center">
-  <img src="src/img/steps/auto-002.png" width="850px">
+  <img src="src/img/steps/auto-002.PNG" width="850px">
 </div>
 
 Na seção seguinte vou colocar o load balacing que criamos anteriormente (Classic Load Balancer)
 
 <div align="center">
-  <img src="src/img/steps/auto-003.png" width="850px">
+  <img src="src/img/steps/auto-003.PNG" width="850px">
 </div>
 
 Na seção seguinte vou declarar as políticas de scaling, e então vamos finalizar a criação.
 <div align="center">
-  <img src="src/img/steps/auto-004.png" width="850px">
+  <img src="src/img/steps/auto-004.PNG" width="850px">
 </div>
 
 ### 🖥️ Instalação do Wordpress 🖥️
@@ -246,14 +246,14 @@ Na seção seguinte vou declarar as políticas de scaling, e então vamos finali
 Após alguns minutos as instâncias configuradas no scaling vão começar a subir e então eu vou instalar o wordpress e configurar a senha de admin e título da página.
 
 <div align="center">
-  <img src="src/img/steps/wp-001.png" width="850px">
-  <img src="src/img/steps/wp-002.png" width="850px">
+  <img src="src/img/steps/wp-001.PNG" width="850px">
+  <img src="src/img/steps/wp-002.PNG" width="850px">
 </div>
 
 E ao acessar o DNS do Load Balancer eu consigo ter acesso ao site!
 
 <div align="center">
-  <img src="src/img/steps/wp-003.png" width="850px">
+  <img src="src/img/steps/wp-003.PNG" width="850px">
 </div>
 
 ### 📚 Referências 📚
@@ -286,11 +286,11 @@ O comando acima significa que vamos estressar a cpu (flag c) sem tempo limite em
 Alguns minutos depois terei 4 instâncias como foi solicitado no autoscaling
 
 <div align="center">
-  <img src="src/img/steps/add-001.png" width="850px">
+  <img src="src/img/steps/add-001.PNG" width="850px">
 </div>
 
 
-###  <img src="src/img/steps/terraform-icon.png" width="25px"> Terraform <img src="src/img/steps/terraform-icon.png" width="25px">
+###  <img src="src/img/steps/terraform-icon.PNG" width="25px"> Terraform <img src="src/img/steps/terraform-icon.PNG" width="25px">
 
 Esse módulo é um extra para a criação automática de toda a estrutura realizada no escopo da atividade:
 
