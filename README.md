@@ -22,7 +22,7 @@ Observações:
 ## Topologia
 
 <div align="center">
-  <img src="src/img/steps/topologia.pngPNG  width="850px">
+  <img src="src/img/steps/topologia.png"  width="850px">
 </div>
 
 ## Requisitos 
@@ -79,7 +79,7 @@ Durante esse processo eu vou criar os security groups que serão usados:
   |TCP     |HTTP  |80     |Anywhere     |0.0.0.0/0   |
 
 <div align="center">
-  <img src="src/img/steps/sg-002.PNG" alt="Security Group para o Load Balancer" width="850px">
+  <img src="src/img/steps/sg-002.png" alt="Security Group para o Load Balancer" width="850px">
    <p><em>Security Group para o Load Balancer</em></p>
 </div>
 
@@ -92,7 +92,7 @@ Durante esse processo eu vou criar os security groups que serão usados:
   |TCP     |HTTP  |80     |Anywhere     |lb-sg-001   |
 
 <div align="center">
-  <img src="src/img/steps/sg-001.PNG" alt="Security Group para a EC2" width="850px">
+  <img src="src/img/steps/sg-001.png" alt="Security Group para a EC2" width="850px">
    <p><em>Security Group para a EC2</em></p>
 </div>
 
@@ -103,7 +103,7 @@ Durante esse processo eu vou criar os security groups que serão usados:
   |TCP     |MYSQL   |3306   |Anywhere     |0.0.0.0/0   |
 
 <div align="center">
-  <img src="src/img/steps/sg-003.PNG" alt="Security Group para o RDS" width="850px">
+  <img src="src/img/steps/sg-003.png" alt="Security Group para o RDS" width="850px">
    <p><em>Security Group para o RDS</em></p>
 </div>
 
@@ -290,7 +290,7 @@ Alguns minutos depois terei 4 instâncias como foi solicitado no autoscaling
 </div>
 
 
-###  <img src="src/img/steps/terraform-icon.PNG" width="25px"> Terraform <img src="src/img/steps/terraform-icon.PNG" width="25px">
+###  <img src="src/img/steps/terraform-icon.png" width="25px"> Terraform <img src="src/img/steps/terraform-icon.png" width="25px">
 
 Esse módulo é um extra para a criação automática de toda a estrutura realizada no escopo da atividade:
 
