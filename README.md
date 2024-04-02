@@ -44,7 +44,7 @@ Pontos de atenção:
 - Sugestão para o tráfego de internet sair pelo LB  (Load Balancer Classic) o pastas públicas e estáticos  do wordpress sugestão de utilizar o EFS (Elastic File Sistem);
 - Fica a critério de cada integrante usar Dockerfile  ou Dockercompose;
 
-- Necessário demonstrar a aplicação wordpress  funcionando (tela de login)
+- Necessário demonstrar a aplicação wordpress  funcionando (tela de login);
 - Aplicação Wordpress precisa estar rodando na porta 80 ou 8080;
 - Utilizar repositório git para versionamento;
 - Criar documentação.
@@ -120,7 +120,7 @@ Durante esse processo eu vou criar os security groups que serão usados:
 
 ### 📁 Elastic File System 📁
 
-Em seguida vou criar o Elastic File System (EFS) que irá armazenar os arquivos estáticos do wordpress direcionando seus endpoints
+Em seguida vou criar o Elastic File System (EFS) que irá armazenar os arquivos estáticos do wordpress direcionando seus endpoints.
 
 Na tela de EFS vou configurar o nome como "wordpress" e a VPC que será usada no processo, com o EFS criado vamos configurar na aba de network o security group para o efs-sg-001 criado anteriormente.
 
@@ -143,7 +143,7 @@ Nessa seção eu vou criar o Load Balancer Classic que será utilizado para aces
    <p><em>Classic Load Balancer</em></p>
 </div>
 
-O nome do Classic Load Balancer será "classic-load-balance-001" e escolher as duas subnets que as requisições serão balanceadas
+O nome do Classic Load Balancer será "classic-load-balance-001" e escolher as duas subnets que as requisições serão balanceadas.
 <div align="center">
   <img src="src/img/steps/lb-002.PNG" width="850px">
    <p><em>Classic Load Balancer</em></p>
@@ -160,7 +160,7 @@ No securtiy group vou adicionar o "lb-sg-001" criado anteriormente, e no "/wp-ad
 
 Nessa seção eu vou criar o banco de dados que será utilizado pelo container wordpress.
 
-Eu vou primeiro entrar dentro do módulo de RDS dentro da AWS e clicar em "Create Database", dentro da tela de criação apenas algumas seções devem ser alteradas:
+Eu vou entrar no módulo de RDS dentro da AWS e clicar em "Create Database", dentro da tela de criação apenas algumas seções devem ser alteradas:
 
 Engine Options => MySQL,</br>
 Templates => Free tier</br>
@@ -178,13 +178,13 @@ Vpc Security Group => rds-sg-001 </br>
 
 
 
-Na parte de "Additional Configuration" vamos colocar o initial database name como "Wordpress"
+Na parte de "Additional Configuration" vamos colocar o initial database name como "Wordpress":
 
 <div align="center">
   <img src="src/img/steps/rds-005.PNG" width="850px">
 </div>
 
-E então vamos criar o banco
+E então vamos criar o banco:
 
 
 ### Launch Template e Key Pair
@@ -200,13 +200,13 @@ Security Group => ec2-sg-001</br>
 Exemplo:
 
 
-Na seção de Key Pair vamos optar por criar um nova chave clicando na opção "Create new key pair"
+Na seção de Key Pair vamos optar por criar um nova chave clicando na opção "Create new key pair":
 <div align="center">
   <img src="src/img/steps/lt-001.PNG" width="850px">
 </div>
 
 
-E então vou colocar um nome opcional no formato ".pem"
+E então vou colocar um nome opcional no formato ".pem":
 <div align="center">
   <img src="src/img/steps/lt-002.PNG" width="850px">
    <p><em>Launch Template</em></p>
@@ -321,7 +321,7 @@ A partir daí dentro de um terminal vou até a pasta do repositório e então ex
 terraform init
 ```
 
-Em seguida executar o comando para criação dos recursos na aws
+Em seguida executar o comando para criação dos recursos na aws:
 
 ```bash
 terraform apply
