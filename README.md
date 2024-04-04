@@ -41,7 +41,7 @@ Start Instance (user_data.sh)
 
 Pontos de atenção:
 - Não utilizar ip público para saída do serviços WP (Evitem publicar o serviço WP via IP Público);
-- Sugestão para o tráfego de internet sair pelo LB  (Load Balancer Classic) o pastas públicas e estáticos  do wordpress sugestão de utilizar o EFS (Elastic File Sistem);
+- Sugestão para o tráfego de internet sair pelo LB  (Load Balancer Classic) o pastas públicas e estáticos  do wordpress sugestão de utilizar o EFS (Elastic File System);
 - Fica a critério de cada integrante usar Dockerfile  ou Dockercompose;
 
 - Necessário demonstrar a aplicação wordpress  funcionando (tela de login);
@@ -257,12 +257,15 @@ E ao acessar o DNS do Load Balancer eu consigo ter acesso ao site!
 </div>
 
 ### 📚 Referências 📚
-https://stackoverflow.com/questions/45193411/how-to-increase-aws-ec2-instance-cpu-utilization-to-100-to-test-autoscaling-gro
+- [How to increase AWS EC2 instance CPU utilization to 100% to test autoscaling group creating new instances?](https://stackoverflow.com/questions/45193411/how-to-increase-aws-ec2-instance-cpu-utilization-to-100-to-test-autoscaling-gro)
 
-https://developer.hashicorp.com/terraform/tutorials/aws-get-started
+- [Get Started - AWS](https://developer.hashicorp.com/terraform/tutorials/aws-get-started)
 
-https://registry.terraform.io/providers/aaronfeng/aws/latest/docs/resources
-### ADICIONAIS 
+- [How to Quickly Deploy WordPress as a Docker Container](https://www.howtogeek.com/devops/how-to-quickly-deploy-wordpress-as-a-docker-container/)
+
+- [AWS Provider](https://registry.terraform.io/providers/aaronfeng/aws/latest/docs/resources)
+
+### 🌟 ADICIONAIS  🌟
 
 #### 🚦 Teste de Scaling usando Stress 🚦
 Após eu criar o auto-scaling group eu coloquei a sua policy para utilização de CPU em 30, significando que, sempre que ela atingisse 30% de seu uso uma nova instância seria criada para suprir essa demanda.
