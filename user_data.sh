@@ -6,6 +6,7 @@ sudo usermod -aG docker $(whoami)
 sudo systemctl start docker
 sudo systemctl enable docker
 sudo mkdir /mnt/efs
+sudo yum install stress -y
 sudo su
 echo "<efs_dns>:/    /mnt/efs    nfs4    defaults,_netdev,rw    0   0" >  /etc/fstab 
 mount -a
