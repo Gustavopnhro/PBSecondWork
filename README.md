@@ -149,7 +149,7 @@ O nome do Classic Load Balancer será "classic-load-balance-001" e escolher as d
    <p><em>Classic Load Balancer</em></p>
 </div>
 
-No securtiy group vou adicionar o "lb-sg-001" criado anteriormente, e no "/wp-admin/install.php", a razão para optar por esse health-check é pela característica da atividade, como essa é uma rota que existe antes e depois do wordpress estar instalado na necessidade de apagar toda a estrutura e subir ela novamente vamos ter ela acessível e saudável para o health check antes mesmo de instalarmos o wordpress.
+No securtiy group vou adicionar o "lb-sg-001" criado anteriormente, e no "/wp-admin/install.php", a razão para optar por esse health-check é pela característica da atividade, como essa é uma rota que existe antes e depois do wordpress estar instalado, na necessidade de apagar toda a estrutura e subir ela novamente vamos ter ela acessível e saudável para o health check, antes mesmo de instalarmos o wordpress.
 
 <div align="center">
   <img src="src/img/steps/lb-003.PNG" width="850px">
